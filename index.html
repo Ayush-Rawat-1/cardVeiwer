@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Card Viewer</title>
+</head>
+<body>
+    <h1>Card Viewer</h1>
+    <div class="card-container">
+        <div id="frontSide" class="frontSide"></div>
+        <div id="backSide" class="backSide"></div>
+    </div>
+    <script type="text/javascript">
+        // Try to open the app via a deep link
+        function tryOpenApp() {
+          const sharedId = getQueryParameter('sharedId');
+          const url = `your-app-scheme://sharedCard/${sharedId}`;  // Deep link scheme for your app
+          
+          const iframe = document.createElement('iframe');
+          iframe.style.display = 'none';
+          iframe.src = url;
+          
+          document.body.appendChild(iframe);
+      
+          setTimeout(() => {
+            window.location.href = `https://yourdomain.com/sharedCard/${sharedId}`;  // Fallback to open in browser
+          }, 500);  // If the app isn't opened within 500ms, fallback to browser
+        }
+      </script>
+      
+      <button onclick="tryOpenApp()">Open in App</button>      
+    <script src="script.js"></script>
+</body>
+</html>
